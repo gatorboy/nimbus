@@ -14,10 +14,5 @@
     "type": "git",
     "url": "https://github.com/salesforce/nimbus"
   },
-  "license": "CC0-1.0",
-  "devDependencies": {
-    "@11ty/eleventy": "^0.10.0",
-    "@11ty/eleventy-plugin-syntaxhighlight": "^2.0.3",
-    "gh-pages": "^2.2.0"
-  }
+  "license": "CC0-1.0"
 }

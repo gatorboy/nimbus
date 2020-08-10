@@ -6,8 +6,8 @@
 //
 
 import "mocha";
-import {expect} from "chai";
-import nimbus from "nimbus-types";
+import { expect } from "chai";
+import nimbus from "@nimbus-js/api";
 
 interface JSAPITestStruct {
   intField: number;
@@ -33,7 +33,7 @@ interface JSAPITestPlugin {
   ): Promise<number>;
 }
 
-declare module "nimbus-types" {
+declare module "@nimbus-js/api" {
   interface NimbusPlugins {
     jsapiTestPlugin: JSAPITestPlugin;
   }
@@ -52,7 +52,7 @@ describe("Nimbus JS initialization", () => {
 
 describe("Nimbus JS API", () => {
   // Test a binding of a nullary function that resolves to an Integer
-  it("nullary function resolving to Int", (done) => {
+  it("nullary function resolving to Int", done => {
     __nimbus.plugins.jsapiTestPlugin
       .nullaryResolvingToInt()
       .then((value: number) => {
@@ -62,7 +62,7 @@ describe("Nimbus JS API", () => {
   });
   // This test is temporarily disabled until Android Array/List implementation is fixed
   // Test a binding of a nullary function that resolves to an array of Integers
-  it("nullary function resolving to Int array", (done) => {
+  it("nullary function resolving to Int array", done => {
     __nimbus.plugins.jsapiTestPlugin
       .nullaryResolvingToIntArray()
       .then((value: Array<number>) => {
@@ -75,7 +75,7 @@ describe("Nimbus JS API", () => {
       });
   });
   // Test a binding of a nullary function that resolves to an object
-  it("nullary function resolving to an object", (done) => {
+  it("nullary function resolving to an object", done => {
     __nimbus.plugins.jsapiTestPlugin
       .nullaryResolvingToObject()
       .then((value: JSAPITestStruct) => {
@@ -86,13 +86,13 @@ describe("Nimbus JS API", () => {
       });
   });
   // Test a binding of a unary function that accepts an Integer and resolves to void
-  it("unary int function resolving to void", (done) => {
+  it("unary int function resolving to void", done => {
     __nimbus.plugins.jsapiTestPlugin.unaryResolvingToVoid(5).then(() => {
       done();
     });
   });
   // Test a binding of a unary function that accepts an object and resolves to void
-  it("unary object function resolving to void", (done) => {
+  it("unary object function resolving to void", done => {
     var param = { intField: 42, stringField: "JSAPITEST" };
     __nimbus.plugins.jsapiTestPlugin
       .unaryObjectResolvingToVoid(param)
@@ -101,7 +101,7 @@ describe("Nimbus JS API", () => {
       });
   });
   // Test a binding of a binary function that accepts an Integer and a function accepting an Integer
-  it("binary function accepting int and callback", (done) => {
+  it("binary function accepting int and callback", done => {
     __nimbus.plugins.jsapiTestPlugin.binaryResolvingToIntCallback(
       5,
       (result: number) => {
@@ -111,13 +111,13 @@ describe("Nimbus JS API", () => {
     );
   });
   // Test a binding of a binary function that accepts an Integer and a function accepting an object
-  it("binary function accepting int and callback taking object", (done) => {
+  it("binary function accepting int and callback taking object", done => {
     __nimbus.plugins.jsapiTestPlugin.binaryResolvingToObjectCallback(
       5,
       (result: JSAPITestStruct) => {
         expect(result).to.deep.equal({
           intField: 42,
-          stringField: "JSAPITEST",
+          stringField: "JSAPITEST"
         });
         done();
       }
@@ -125,18 +125,17 @@ describe("Nimbus JS API", () => {
   });
 
   // commented out test because they fail in android as it is not supported yet
-  it('binary function accepting int and callback taking an object returning an int', (done) => {
-    __nimbus.plugins.jsapiTestPlugin.binaryResolvingToObjectCallbackToInt(
-      5,
-      (result: JSAPITestStruct) => {
+  it("binary function accepting int and callback taking an object returning an int", done => {
+    __nimbus.plugins.jsapiTestPlugin
+      .binaryResolvingToObjectCallbackToInt(5, (result: JSAPITestStruct) => {
         expect(result).to.deep.equal({
           intField: 42,
           stringField: "JSAPITEST"
         });
-      }
-    ).then((value: number) => {
-      expect(value).to.deep.equal(1);
-      done();
-    })
+      })
+      .then((value: number) => {
+        expect(value).to.deep.equal(1);
+        done();
+      });
   });
 });

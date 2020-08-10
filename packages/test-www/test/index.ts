@@ -5,7 +5,7 @@
 // For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
 //
 
-import nimbus from "nimbus-types";
+import nimbus from "@nimbus-js/api";
 import "./nimbus-core-tests";
 import "./broadcast-tests";
 import "./callback-encodable-tests";
@@ -18,7 +18,7 @@ if (callbackTestPlugin !== undefined) {
   callbackTestPlugin.addOne = (x: number) => Promise.resolve(x + 1);
   callbackTestPlugin.failWith = (message: string) => Promise.reject(message);
   callbackTestPlugin.wait = (milliseconds: number) =>
-    new Promise((resolve) => setTimeout(resolve, milliseconds));
+    new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 
 window.onload = () => {

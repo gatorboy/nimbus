@@ -21,7 +21,7 @@ fs.removeSync(dist);
 // Copy public folder
 fs.copySync(publicFolder, dist);
 
-const mochaPath = path.resolve(__dirname, "node_modules", "mocha");
+const mochaPath = path.resolve(__dirname, "..", "..", "node_modules", "mocha");
 fs.copySync(
   path.resolve(mochaPath, "mocha.css"),
   path.resolve(dist, "mocha.css")
@@ -30,7 +30,7 @@ fs.copySync(
   path.resolve(mochaPath, "mocha.js"),
   path.resolve(dist, "mocha.js")
 );
-const chaiPath = path.resolve(__dirname, "node_modules", "chai");
+const chaiPath = path.resolve(__dirname, "..", "..", "node_modules", "chai");
 fs.copySync(path.resolve(chaiPath, "chai.js"), path.resolve(dist, "chai.js"));
 const sharedTestsPath = path.resolve(__dirname, "test", "shared-tests.js");
 fs.copySync(
@@ -40,14 +40,14 @@ fs.copySync(
 
 export default {
   input: "test/index.ts",
-  external: ["mocha", "chai", "nimbus-types"],
+  external: ["mocha", "chai", "@nimbus-js/api"],
   output: {
     file: output,
     format: "iife",
     globals: {
       chai: "chai",
-      "nimbus-types": "__nimbus",
-    },
+      "@nimbus-js/api": "__nimbus"
+    }
   },
-  plugins: [resolve(), typescript()],
+  plugins: [resolve(), typescript()]
 };

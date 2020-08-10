@@ -1,0 +1,24 @@
+{
+    "name": "@nimbus-js/api",
+    "version": "2.0.0-beta3",
+    "description": "Nimbus is a bridge for hybrid app development.",
+    "license": "BSD-3-Clause",
+    "main": "dist/iife/nimbus.js",
+    "module": "dist/es/nimbus.js",
+    "types": "dist/es/index.d.ts",
+    "files": [
+        "/dist"
+    ],
+    "scripts": {
+        "build": "rollup -c rollup.config.js",
+        "build-docs": "typedoc --out dist/typedoc --tsconfig ./tsconfig.json ./src",
+        "clean": "rm -rf dist",
+        "lint": "eslint 'src/**/*.{ts,js}'",
+        "prepare": "npm run build",
+        "prettier": "prettier --write 'src/**/*.{js,ts}'"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:salesforce/nimbus.git"
+    }
+}

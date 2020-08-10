@@ -2,13 +2,44 @@
     "name": "root",
     "private": true,
     "devDependencies": {
-        "lerna": "^3.15.0"
+        "@11ty/eleventy": "^0.11.0",
+        "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
+        "@types/chai": "^4.1.7",
+        "@types/mocha": "^5.2.5",
+        "@typescript-eslint/eslint-plugin": "^3.8.0",
+        "@typescript-eslint/parser": "^3.8.0",
+        "babel-eslint": "^10.1.0",
+        "chai": "^4.2.0",
+        "cross-env": "^7.0.2",
+        "eslint": "^7.6.0",
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-plugin-prettier": "^3.1.4",
+        "fs-extra": "^9.0.1",
+        "gh-pages": "^2.2.0",
+        "lerna": "^3.22.1",
+        "mocha": "^6.1.4",
+        "prettier": "^2.0.5",
+        "rimraf": "^3.0.2",
+        "rollup": "^2.23.0",
+        "rollup-plugin-node-resolve": "^5.2.0",
+        "rollup-plugin-serve": "^1.0.3",
+        "rollup-plugin-typescript2": "^0.27.1",
+        "typedoc": "^0.17.8",
+        "typescript": "^3.9.7"
     },
     "scripts": {
         "prepare": "lerna bootstrap",
-        "bump": "lerna version --no-git-tag-version --no-push",
+        "build": "lerna run build",
+        "clean": "lerna run clean",
         "lint": "lerna run lint",
-        "serve:demo": "lerna run serve --scope demo-www --stream",
-        "clean": "lerna run clean"
+        "bump": "lerna version --no-git-tag-version --no-push",
+        "serve:demo": "lerna run serve --scope demo-www --stream"
+    },
+    "dependencies": {
+        "@nimbus-js/api": "file:packages/@nimbus-js/api",
+        "@nimbus-js/runtime": "file:packages/@nimbus-js/runtime",
+        "demo-www": "file:packages/demo-www",
+        "nimbus-doc": "file:docs",
+        "test-www": "file:packages/test-www"
     }
 }
