@@ -30,7 +30,7 @@ fs.copySync(
   path.resolve(mochaPath, "mocha.js"),
   path.resolve(dist, "mocha.js")
 );
-const chaiPath = path.resolve(__dirname, "..", "..", "node_modules", "chai");
+const chaiPath = require.resolve("chai");
 fs.copySync(path.resolve(chaiPath, "chai.js"), path.resolve(dist, "chai.js"));
 const sharedTestsPath = path.resolve(__dirname, "test", "shared-tests.js");
 fs.copySync(
