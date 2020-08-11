@@ -21,7 +21,7 @@ fs.removeSync(dist);
 // Copy public folder
 fs.copySync(publicFolder, dist);
 
-const mochaPath = path.resolve(__dirname, "..", "..", "node_modules", "mocha");
+const mochaPath = require.resolve("mocha");
 fs.copySync(
   path.resolve(mochaPath, "mocha.css"),
   path.resolve(dist, "mocha.css")
